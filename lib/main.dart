@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ui_13_chat_app_ui/screen2.dart';
+import 'package:flutter_ui_13_chat_app_ui/screen3.dart';
 import 'package:flutter_ui_13_chat_app_ui/screens/screen1.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Screen2(),
+      home: Screen3(),
     );
   }
 }
