@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 // import 'package:dotted_border/dash_painter.dart';
 
 class Screen2 extends StatefulWidget {
@@ -76,8 +77,6 @@ class _Screen2State extends State<Screen2> {
                                 ),
                               ),
                             ),
-
-                            // Circle on the top with camera icon
                             Container(
                               child: Icon(
                                 Icons.camera_alt,
@@ -139,14 +138,14 @@ class _Screen2State extends State<Screen2> {
                             ],
                           ),
                         ),
-                        storyItems("Fieece",10),
-                        storyItems("Hilary",3),
-                        storyItems("Fieece",15),
-                        storyItems("Hilary",1),
-                        storyItems("Fieece",6),
-                        storyItems("Hilary",12),
-                        storyItems("Fieece",3),
-                        storyItems("Hilary",9),
+                        storyItems("Fieece", 10),
+                        storyItems("Hilary", 3),
+                        storyItems("Fieece", 15),
+                        storyItems("Hilary", 1),
+                        storyItems("Fieece", 6),
+                        storyItems("Hilary", 12),
+                        storyItems("Fieece", 3),
+                        storyItems("Hilary", 9),
                       ],
                     ),
                   ),
@@ -158,7 +157,6 @@ class _Screen2State extends State<Screen2> {
                     height: 2,
                   ),
                 ),
-                // SizedBox(height: -10),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.only(left: 15.0, right: 15),
@@ -241,7 +239,6 @@ class _Screen2State extends State<Screen2> {
             ),
             Positioned(
               bottom: 30,
-              // MediaQuery.of(context).size.height/2,
               child: Padding(
                 padding: const EdgeInsets.only(left: 8.0, right: 8),
                 child: Container(
@@ -364,10 +361,9 @@ class _Screen2State extends State<Screen2> {
   }
 
   double radius = 240;
-  // double statusImage = 3;
-  // double quantStatus = (radius - (10 * (statusImg - 1))) / statusImg.length;
-  Widget storyItems(name,statusImageItems) {
-    double quantStatus = (radius - (10 * (statusImageItems - 1))) / statusImageItems;
+  Widget storyItems(name, statusImageItems) {
+    double quantStatus =
+        (radius - (10 * (statusImageItems - 1))) / statusImageItems;
     return Padding(
       padding: const EdgeInsets.only(top: 8.0, left: 10),
       child: Column(
@@ -377,7 +373,6 @@ class _Screen2State extends State<Screen2> {
             width: 50,
             child: DottedBorder(
               color: Colors.black, borderType: BorderType.Circle,
-              // radius: Radius.circular(8),
               strokeWidth: 2, dashPattern: [quantStatus, 6],
               child: Center(
                 child: Container(
@@ -388,15 +383,7 @@ class _Screen2State extends State<Screen2> {
                 ),
               ),
             ),
-            // Container(
-            //   height: 44,
-            //   width: 44,
-            //   decoration:
-            //       BoxDecoration(color: Colors.grey, shape: BoxShape.circle),
-            // ),
             decoration: BoxDecoration(
-              // border: Border.all(width: 2, color: Colors.green.shade400),
-              // color: Colors.grey,
               shape: BoxShape.circle,
             ),
           ),
@@ -409,120 +396,144 @@ class _Screen2State extends State<Screen2> {
 
   Widget chatItems(
       name, message, unreadMessageCount, unreadMessageTime, online) {
-    return Container(
-      height: 80,
-      color: Colors.white,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              Container(
-                height: 60,
-                width: 60,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.grey[300],
-                ),
-              ),
-              online
-                  ? Positioned(
-                      right: 2,
-                      bottom: 4,
-                      child: Container(
-                        height: 14,
-                        width: 14,
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                                blurRadius: 1,
-                                color: Colors.white,
-                                spreadRadius: 2)
-                          ],
-                          color: Colors.green,
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                    )
-                  : Container(),
-            ],
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              left: 0,
-              right: 0,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  name,
-                  style: TextStyle(
-                    fontSize: 17,
-                    height: 1.1,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                message.length > 60
-                    ? SizedBox(height: 4)
-                    : SizedBox(height: 10),
-                Container(
-                  width: 200,
-                  child: Text(
-                    message,
-                    maxLines: 2,
-                    textAlign: TextAlign.left,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-              ],
+    return Slidable(
+      actionPane: SlidableDrawerActionPane(), actionExtentRatio: 0.15,
+      secondaryActions: <Widget>[
+        Container(
+          height: 35,
+          width: 35,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: LinearGradient(
+              colors: [Colors.green.shade400, Colors.green.shade700],
             ),
           ),
-          Container(
-            width: 55,
+          child: Icon(
+            Icons.share,
             color: Colors.white,
-            child: Column(
+            size: 20,
+          ),
+        ),
+        IconSlideAction(
+            caption: 'Delete',
+            color: Colors.red,
+            icon: Icons.delete,
+            onTap: () {}),
+      ],
+      child: Container(
+        height: 80,
+        color: Colors.white,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Stack(
+              alignment: Alignment.center,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0, bottom: 12),
-                  child: Text(
-                    unreadMessageTime,
-                    style: TextStyle(color: Colors.grey),
+                Container(
+                  height: 60,
+                  width: 60,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.grey[300],
                   ),
                 ),
-                unreadMessageCount > 0
-                    ? Container(
-                        height: 32,
-                        width: 30,
-                        decoration: BoxDecoration(
-                          // borderRadius: BorderRadius.circular(12),
-                          shape: BoxShape.circle,
-                          gradient: LinearGradient(
-                              colors: [
-                                Colors.green[200],
-                                Colors.green[600],
-                              ],
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight),
-                        ),
-                        child: Center(
-                          child: Text(
-                            unreadMessageCount.toString(),
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 18,
-                            ),
+                online
+                    ? Positioned(
+                        right: 2,
+                        bottom: 4,
+                        child: Container(
+                          height: 14,
+                          width: 14,
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                  blurRadius: 1,
+                                  color: Colors.white,
+                                  spreadRadius: 2)
+                            ],
+                            color: Colors.green,
+                            shape: BoxShape.circle,
                           ),
                         ),
                       )
                     : Container(),
               ],
             ),
-          ),
-        ],
+            Padding(
+              padding: EdgeInsets.only(
+                left: 0,
+                right: 0,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    name,
+                    style: TextStyle(
+                      fontSize: 17,
+                      height: 1.1,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  message.length > 60
+                      ? SizedBox(height: 4)
+                      : SizedBox(height: 10),
+                  Container(
+                    width: 200,
+                    child: Text(
+                      message,
+                      maxLines: 2,
+                      textAlign: TextAlign.left,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              width: 55,
+              color: Colors.white,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10.0, bottom: 12),
+                    child: Text(
+                      unreadMessageTime,
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                  unreadMessageCount > 0
+                      ? Container(
+                          height: 32,
+                          width: 30,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            gradient: LinearGradient(
+                                colors: [
+                                  Colors.green[200],
+                                  Colors.green[600],
+                                ],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight),
+                          ),
+                          child: Center(
+                            child: Text(
+                              unreadMessageCount.toString(),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 18,
+                              ),
+                            ),
+                          ),
+                        )
+                      : Container(),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
