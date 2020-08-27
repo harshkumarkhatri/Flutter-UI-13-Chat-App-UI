@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class Screen4 extends StatefulWidget {
@@ -7,6 +9,15 @@ class Screen4 extends StatefulWidget {
 
 class _Screen4State extends State<Screen4> {
   bool showTime = false;
+  ScrollController controller = new ScrollController();
+  
+  
+  void initState() {
+    super.initState();
+    // /Timer is used to take the starting point of chats at the bottom
+    Timer.run(() => controller.jumpTo(controller.position.maxScrollExtent));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -132,6 +143,7 @@ class _Screen4State extends State<Screen4> {
                             width: MediaQuery.of(context).size.width,
                             color: Colors.white,
                             child: ListView(
+                              controller: controller,
                               children: [
                                 messageFormatting("Hey how are you", "me"),
                                 messageFormatting("ia ma fine", "not me"),
@@ -167,7 +179,6 @@ class _Screen4State extends State<Screen4> {
             child: Padding(
               padding: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
               child: Container(
-                // color: Colors.red,
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
@@ -214,24 +225,11 @@ class _Screen4State extends State<Screen4> {
               ),
             ),
           ),
-
-          // Button send message
-          // Material(
-          //   child: Container(
-          //     margin: EdgeInsets.symmetric(horizontal: 8.0),
-          //     child: IconButton(
-          //       icon: Icon(Icons.send, color: Colors.greenAccent),
-          //       color: Colors.red,
-          //     ),
-          //   ),
-          //   color: Colors.white,
-          // ),
         ],
       ),
       width: double.infinity,
       height: 60.0,
       decoration: BoxDecoration(
-          // border: Border(top: BorderSide(color: Colors.grey, width: 0.5)),
           color: Colors.white),
     );
   }
