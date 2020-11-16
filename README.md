@@ -13,11 +13,11 @@ Some snaps from the UI:-
 * Full Video:- <br>
 * Snaps:-
 <p>
-<img src="screenshots/01 - Chat.png" height=450>
-<img src="screenshots/02 - Chat.png" height=450>
-<img src="screenshots/03 - Chat.png" height=450>
-<img src="screenshots/04 - Chat.png" height=450>
-<img src="screenshots/05 - Chat.png" height=450>
+<img src="screenshots/01 - Chat.png" height=400>
+<img src="screenshots/02 - Chat.png" height=400>
+<img src="screenshots/03 - Chat.png" height=400>
+<img src="screenshots/04 - Chat.png" height=400>
+<img src="screenshots/05 - Chat.png" height=400>
 </p>
 
 ___
